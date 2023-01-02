@@ -5,7 +5,7 @@ const form = document.querySelector('form')
 const chatContainer = document.querySelector('#chat_container')
 
 let loadInterval
-
+let isTyping = false
 function loader(element) {
   element.textContent = ''
   loadInterval = setInterval(() => {
@@ -18,12 +18,14 @@ function loader(element) {
 
 function typeText(element, text) {
   let index = 0
+  isTyping = true
   let interval = setInterval(() => {
     if (index < text.length) {
       element.innerHTML += text.charAt(index)
       index++ 
     } else {
       clearInterval(interval)
+      isTyping = false
     }
   }, 20)
 
@@ -49,6 +51,7 @@ function chatStripe(isAi, value, uniqueId) {
 const errorMessage = document.querySelector('.error')
 const handleSubmit = async(e)=>{
   e.preventDefault()
+  if(isTyping)return
   const data = new FormData(form)
   if(data.get('prompt')?.length < 3){
     errorMessage.style.display = 'block'
