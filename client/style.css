@@ -148,3 +148,11 @@ form img {
   width: 30px;
   height: 30px;
 }
+.error{
+  color: rgba(255, 0, 64, 0.87);
+  background-color: #40414F;
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  display: none;
+}

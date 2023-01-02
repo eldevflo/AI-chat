@@ -46,10 +46,16 @@ function chatStripe(isAi, value, uniqueId) {
       </div>
     </div>`
 }
-
+const errorMessage = document.querySelector('.error')
 const handleSubmit = async(e)=>{
   e.preventDefault()
   const data = new FormData(form)
+  if(data.get('prompt')?.length < 3){
+    errorMessage.style.display = 'block'
+    return
+  }
+  errorMessage.style.display = 'none'
+
   //user's chat stripe
   chatContainer.innerHTML += chatStripe(false, data.get('prompt'))
   form.reset()
